@@ -26,13 +26,25 @@ public class HomeController extends Controller {
       noteJson.add(text);
       saveJson(noteJson);
       return ok(text);
+    }
 
+    public Result reset() {
+        System.out.println("RESET!");
+      try {
+        ObjectMapper mapper = new ObjectMapper();
+        List<String> list = new ArrayList<String>();
+        list.add("START");
+        mapper.writeValue(new File("/tmp/notes.json"), list);
+      } catch(Exception ex){
+        throw new RuntimeException(ex);
+      }
+      return ok("");
     }
 
     private List<String> getJson() {
       try {
         ObjectMapper mapper = new ObjectMapper();
-      return mapper.readValue(new File("/tmp/notes.json"), new TypeReference<List<String>>(){});
+        return mapper.readValue(new File("/tmp/notes.json"), new TypeReference<List<String>>(){});
       } catch(Exception ex){
         throw new RuntimeException(ex);
       }
