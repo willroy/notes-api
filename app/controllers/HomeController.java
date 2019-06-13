@@ -33,7 +33,7 @@ public class HomeController extends Controller {
       try {
         ObjectMapper mapper = new ObjectMapper();
         List<String> list = new ArrayList<String>();
-        list.add("START");
+        list.add("filleritem");
         mapper.writeValue(new File("/tmp/notes.json"), list);
       } catch(Exception ex){
         throw new RuntimeException(ex);
